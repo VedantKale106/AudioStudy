@@ -1,0 +1,247 @@
+/* Global styles */
+:root {
+    --primary-color: #4a6fa5;
+    --secondary-color: #6c63ff;
+    --text-color: #333;
+    --light-bg: #f5f7fa;
+    --card-bg: #ffffff;
+    --highlight-color: #ffeb3b;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--light-bg);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+header h1 {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+main {
+    flex: 1;
+}
+
+footer {
+    text-align: center;
+    margin-top: 2rem;
+    padding: 1rem 0;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* Subject list page */
+.subject-list ul {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.subject-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease;
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+.subject-card:hover {
+    transform: translateY(-5px);
+}
+
+.subject-icon {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.subject-title {
+    font-weight: 600;
+    text-align: center;
+}
+
+.no-content {
+    text-align: center;
+    padding: 2rem;
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+}
+
+/* Player page */
+.player-container {
+    max-width: 900px;
+}
+
+.back-button {
+    position: absolute;
+    left: 20px;
+    text-decoration: none;
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.player-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem 0;
+    gap: 15px;
+}
+
+.control-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background-color: var(--primary-color);
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+}
+
+.control-btn:hover {
+    background-color: var(--secondary-color);
+}
+
+.speed-control {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.progress-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.progress-bar {
+    flex: 1;
+    height: 8px;
+    background-color: #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-right: 15px;
+}
+
+.progress {
+    height: 100%;
+    background-color: var(--secondary-color);
+    width: 0;
+    transition: width 0.2s;
+}
+
+.time-display {
+    min-width: 70px;
+    text-align: right;
+    font-size: 0.9rem;
+}
+
+.content-container {
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    padding: 20px;
+    margin-bottom: 1rem;
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.qa-item {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #eee;
+}
+
+.qa-item:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.question {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.answer {
+    color: #444;
+}
+
+.active-item {
+    background-color: rgba(255, 235, 59, 0.2);
+    padding: 10px;
+    margin: -10px;
+    border-radius: 4px;
+}
+
+.session-info {
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    padding: 15px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .subject-list ul {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+    
+    .back-button {
+        position: static;
+        display: block;
+        margin-bottom: 10px;
+    }
+    
+    .player-controls {
+        flex-direction: column;
+    }
+    
+    .content-container {
+        max-height: 50vh;
+    }
+}
+
+/* Highlight for active text being spoken */
+.highlight {
+    background-color: var(--highlight-color);
+    padding: 2px 0;
+}

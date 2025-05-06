@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ content.subject }} - Study Assistant</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="container player-container">
+        <header>
+            <a href="/" class="back-button">← Back</a>
+            <h1>{{ content.subject }}</h1>
+            <div class="player-controls">
+                <button id="playPauseBtn" class="control-btn">
+                    <span id="playIcon">▶</span>
+                    <span id="pauseIcon" style="display:none">⏸</span>
+                </button>
+                <button id="skipBtn" class="control-btn">⏭</button>
+                <div class="speed-control">
+                    <label for="speedRange">Speed:</label>
+                    <input type="range" id="speedRange" min="0.5" max="2" step="0.1" value="1">
+                    <span id="speedValue">1.0x</span>
+                </div>
+            </div>
+        </header>
+        
+        <main>
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar">
+                    <div class="progress" id="progress"></div>
+                </div>
+                <div class="time-display">
+                    <span id="currentQA">1</span>/<span id="totalQA">{{ content.qa_pairs|length }}</span>
+                </div>
+            </div>
+            
+            <div class="content-container">
+                <div id="qaContent" class="qa-content">
+                    {% for qa in content.qa_pairs %}
+                        <div class="qa-item" data-index="{{ loop.index0 }}">
+                            <div class="question">{{ qa.question }}</div>
+                            <div class="answer">{{ qa.answer }}</div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            
+            <div class="session-info">
+                <div class="timer">
+                    <span>Study time: </span>
+                    <span id="studyTimer">00:00</span>
+                </div>
+                <div class="break-info">
+                    <span>Break in: </span>
+                    <span id="breakTimer">01:00</span>
+                </div>
+            </div>
+        </main>
+        
+        <footer>
+            <p>Currently in: <span id="currentMode">Study</span> mode</p>
+        </footer>
+    </div>
+    
+    <!-- Hidden audio elements -->
+    <audio id="speechAudio"></audio>
+    <audio id="breakAudio" loop></audio>
+    
+    <!-- Data passing from Flask to JavaScript -->
+    <script>
+        const contentData = {{ content|tojson }};
+    </script>
+    
+    <!-- Service worker for background audio -->
+    <script src="/static/js/service-worker.js" defer></script>
+    
+    <!-- Main player script -->
+    <script src="/static/js/player.js" defer></script>
+</body>
+</html>

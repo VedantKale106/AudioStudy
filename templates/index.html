@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Assistant</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Study Assistant</h1>
+            <p>Select a subject to begin studying</p>
+        </header>
+        
+        <main>
+            <div class="subject-list">
+                {% if subjects %}
+                    <ul>
+                        {% for subject in subjects %}
+                            <li>
+                                <a href="{{ url_for('subject', subject_name=subject.name) }}" class="subject-card">
+                                    <div class="subject-icon">📚</div>
+                                    <div class="subject-title">{{ subject.name }}</div>
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <div class="no-content">
+                        <p>No subject materials found. Please add .docx files to the material folder.</p>
+                    </div>
+                {% endif %}
+            </div>
+        </main>
+        
+        <footer>
+            <p>Study Assistant © 2025</p>
+        </footer>
+    </div>
+</body>
+</html>
